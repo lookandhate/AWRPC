@@ -13,19 +13,80 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="DiscordSDK">
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{8a1f7a3a-9c95-4011-9182-165e65d8c504}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DiscordSDK">
       <UniqueIdentifier>{8dec68fd-547b-4ec2-a6f4-1a1d36ba6bf2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{8a1f7a3a-9c95-4011-9182-165e65d8c504}</UniqueIdentifier>
+    <Filter Include="Source Files\DiscordSDK\Include">
+      <UniqueIdentifier>{1d8ba599-9ab2-49a0-b69d-6b1059b6c60e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DiscordSDK\src">
+      <UniqueIdentifier>{fccd9921-6c8c-4ae7-9dbd-7db1b7a0391b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Class">
+      <UniqueIdentifier>{cd7fe1dc-cb22-48a2-b6f7-8712e92a08db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utils.cpp">
-      <Filter>Utils</Filter>
+    <ClCompile Include="src\Utils.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="discord\src\connection_win.cpp">
+      <Filter>Source Files\DiscordSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="discord\src\discord_register_win.cpp">
+      <Filter>Source Files\DiscordSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="discord\src\discord_rpc.cpp">
+      <Filter>Source Files\DiscordSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="discord\src\dllmain.cpp">
+      <Filter>Source Files\DiscordSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="discord\src\rpc_connection.cpp">
+      <Filter>Source Files\DiscordSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="discord\src\serialization.cpp">
+      <Filter>Source Files\DiscordSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Discord.cpp">
+      <Filter>Source Files\Class</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="discord\include\discord_register.h">
+      <Filter>Source Files\DiscordSDK\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="discord\include\discord_rpc.h">
+      <Filter>Source Files\DiscordSDK\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="discord\src\backoff.h">
+      <Filter>Source Files\DiscordSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="discord\src\connection.h">
+      <Filter>Source Files\DiscordSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="discord\src\msg_queue.h">
+      <Filter>Source Files\DiscordSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="discord\src\rpc_connection.h">
+      <Filter>Source Files\DiscordSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="discord\src\serialization.h">
+      <Filter>Source Files\DiscordSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="Discord.h">
+      <Filter>Source Files\Class</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="discord\src\discord_register_osx.m">
+      <Filter>Source Files\DiscordSDK\src</Filter>
+    </None>
   </ItemGroup>
 </Project>

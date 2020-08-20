@@ -143,6 +143,7 @@ int main()
 	if (!MemUtils::IsGameRunning("armoredwarfare.exe"))
 	{
 		std::cout << "Game isn't running";
+		std::cin.get();
 		return 1;
 	}
 

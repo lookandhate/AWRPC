@@ -18,6 +18,30 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Discord.cpp" />
+    <ClCompile Include="discord\src\connection_win.cpp" />
+    <ClCompile Include="discord\src\discord_register_win.cpp" />
+    <ClCompile Include="discord\src\discord_rpc.cpp" />
+    <ClCompile Include="discord\src\dllmain.cpp" />
+    <ClCompile Include="discord\src\rpc_connection.cpp" />
+    <ClCompile Include="discord\src\serialization.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Discord.h" />
+    <ClInclude Include="discord\include\discord_register.h" />
+    <ClInclude Include="discord\include\discord_rpc.h" />
+    <ClInclude Include="discord\src\backoff.h" />
+    <ClInclude Include="discord\src\connection.h" />
+    <ClInclude Include="discord\src\msg_queue.h" />
+    <ClInclude Include="discord\src\rpc_connection.h" />
+    <ClInclude Include="discord\src\serialization.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="discord\src\discord_register_osx.m" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -72,19 +96,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)rapidjson;$(ProjectDir)discord\src;$(ProjectDir)discord\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)rapidjson;$(ProjectDir)discord\src;$(ProjectDir)discord\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\bin</OutDir>
     <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\Intermidiate</IntDir>
+    <IncludePath>$(ProjectDir)rapidjson;$(ProjectDir)discord\src;$(ProjectDir)discord\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\bin</OutDir>
     <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\Intermidiate</IntDir>
+    <IncludePath>$(ProjectDir)rapidjson;$(ProjectDir)discord\src;$(ProjectDir)discord\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -144,10 +172,6 @@
       <OutputFile>$(OutDir)bin\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Utils.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
