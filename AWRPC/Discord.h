@@ -8,7 +8,7 @@ class Discord
 {
 public:
 	void Initialize();
-	void Update();
+	void Update(const char* state, const char* details);
 
 };
 

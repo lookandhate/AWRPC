@@ -1,23 +1,29 @@
 
-#include "Windows.h"
-#include <tlhelp32.h>
-#include <tchar.h>
-
 #include <iostream>
 #include <string>
 #include <map>
 
+#include "Windows.h"
+#include <tlhelp32.h>
+#include <tchar.h>
+#include "../Discord.h"
+
+enum MapType
+{
+	EHangar = 0, EPvP, EGlops, EPvPGlops, EPvE
+};
 
 struct MapLocalization
 {
 	const std::string m_eng;
 	const std::string m_rus;
+	MapType m_mapType = EHangar;
 	
 	MapLocalization() :
-		m_rus("NULL"), m_eng("NULL") {};
+		m_rus("NULL"), m_eng("NULL"), m_mapType(EHangar){};
 	
-	MapLocalization(std::string eng, std::string rus) :
-		m_rus(rus), m_eng(eng) {};
+	MapLocalization(std::string eng, std::string rus, MapType maptype=EHangar) :
+		m_rus(rus), m_eng(eng), m_mapType(maptype){};
 
 };
 
@@ -50,24 +56,24 @@ std::map<std::string, MapLocalization> levelLocalization = {
 	{"glo09_grassyfields" , MapLocalization("Pleternica", "Плетерница")},
 	{"glo11_alpine" , MapLocalization("Grindelwald", "Гриндельвальд")},
 	{"glo17_coruscant" , MapLocalization("Moscow", "Москва")},
-	{"pvp02_riverpoint" , MapLocalization("Cold Strike", "Гори")},
-	{"pvp05_pipelines" , MapLocalization("River Point", "Мостар")},
-	{"pvp06_portstorm" , MapLocalization("Pipelines", "Эль-Ариш")},
-	{"pvp07_coastalthreat" , MapLocalization("Port Storm", "Умм-Каср")},
-	{"pvp09_reactor" , MapLocalization("Coastal Threat", "Батуми")},
-	{"pvp13_desertcrossing" , MapLocalization("Reactor", "Уризар")},
-	{"pvp14_lostisland" , MapLocalization("Desert Crossing", "Суэцкий канал")},
-	{"pvp15_frontline" , MapLocalization("Lost Island", "Палау")},
-	{"pvp18_canyon" , MapLocalization("Front Line", "Виста")},
-	{"pvp19_tropicalcoast" , MapLocalization("Chemical Plant", "Аламо")},
-	{"pvp20_panamacanal" , MapLocalization("Tropical Coast", "Порт-Антонио")},
-	{"cus_alabino_polygon" , MapLocalization("Waterway", "Панамский канал")},
+	{"pvp01_coldstrike" , MapLocalization("Cold Strike", "Гори")},
+	{"pvp02_riverpoint" , MapLocalization("River Point", "Мостар")},
+	{"pvp05_pipelines" , MapLocalization("Pipelines", "Эль-Ариш")},
+	{"pvp06_portstorm" , MapLocalization("Port Storm", "Умм-Каср")},
+	{"pvp07_coastalthreat" , MapLocalization("Coastal Threat", "Батуми")},
+	{"pvp09_reactor" , MapLocalization("Reactor", "Уризар")},
+	{"pvp13_desertcrossing" , MapLocalization("Desert Crossing", "Суэцкий канал")},
+	{"pvp14_lostisland" , MapLocalization("Lost Island", "Палау")},
+	{"pvp15_frontline" , MapLocalization("Front Line", "Виста")},
+	{"pvp18_canyon" , MapLocalization("Chemical Plant", "Аламо")},
+	{"pvp19_tropicalcoast" , MapLocalization("Tropical Coast", "Порт-Антонио")},
+	{"pvp20_panamacanal" , MapLocalization("Waterway", "Панамский канал")},
 };
 
 namespace MemUtils {
 	constexpr uintptr_t MAP_NAME_MEMORY_ADDRESS = 53356283;
 
-	bool IsGameRunning(const TCHAR* const executableName)
+	bool IsGameRunning(const char* const executableName)
 	{
 		PROCESSENTRY32 procEntry;
 		procEntry.dwSize = sizeof(PROCESSENTRY32);
@@ -200,38 +206,42 @@ bool GetCurrentMap(HANDLE& gameHandle, LPVOID buffer, uintptr_t BaseAddress)
 
 int main()
 {
+
 	if (!MemUtils::IsGameRunning("armoredwarfare.exe"))
 	{
 		std::cout << "Game isn't running";
-		std::cin.get();
-		return 1;
+		while (!MemUtils::IsGameRunning("armoredwarfare.exe"))
+		{
+			Sleep(10000);
+		}
 	}
-
+	std::cout << "Game is running\n";
+	
+	std::cout << "Initializing discord client...";
+	/// Create DiscordSDK object and fill strings with temp data
+	Discord* DiscordSDK = new Discord;
 	char buffer[20] = "Nothing";
 	std::string level = "Nothing";
 
-	std::cout << "Game is running\n";
-
+	/// Get Game PID
 	DWORD PID = MemUtils::GetPID("armoredwarfare.exe");
 	std::cout << "Game PID is: " << PID << std::endl;
-
+	
+	/// Get base address of armoredwarfare.exe module
 	auto BaseAddress = MemUtils::GetBaseAddr(PID, "armoredwarfare.exe");
 	std::cout << "Base address: " << BaseAddress << std::endl;
 
+
+	/// Get game handle
 	std::cout << "Getting game handle.... ";
 	HANDLE gamehandle;
 	bool bHandleStatus = MemUtils::GetGameHandle(gamehandle, PID);
 	std::cout << "Handle Status:" << bHandleStatus << std::endl;
 
-
-	//bool bMapRead = GetCurrentMap(gamehandle, &buffer, BaseAddress);
-	//level = std::string(buffer);
-	//int slash_index = level.find('/');
-	//level = level.substr(0, slash_index);
-	//std::cout << "Is Map read: " << bMapRead << buffer << std::endl;
-
+	std::cout << "Press Enter to begin" << std::endl;
 	std::cin.get();
-	while (true)
+	DiscordSDK->Initialize();
+	while ((!MemUtils::IsGameRunning("armoredwarfare.exe")))
 	{
 		system("cls");
 		bool bMapRead = GetCurrentMap(gamehandle, &buffer, BaseAddress);
@@ -241,7 +251,17 @@ int main()
 		level = level.substr(0, slash_index);
 		std::string eulocalizedlevel = levelLocalization[level].m_eng;
 
+		if (levelLocalization[level].m_eng == "Hangar")
+		{
+			DiscordSDK->Update("Chilling in hangar", "Testing API");
+		}
+
+		std::string PlayingOnMapString = "Map " + levelLocalization[level].m_eng;
+		DiscordSDK->Update(PlayingOnMapString.c_str(), "Playing");
+
 		std::cout << "Is Map read: " << bMapRead << " Level: " <<  level << std::endl << " Localized Level(ENG): " << levelLocalization[level].m_eng << std::endl << " Localized Level(RUS): " << levelLocalization[level].m_rus << std::endl;
 		Sleep(100);
 	}
+	std::cout << "Game isnt running\nPress anykey to close the program";
+	std::cin.get();
 }
