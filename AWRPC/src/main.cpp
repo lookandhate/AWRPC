@@ -299,6 +299,10 @@ int main()
 	}
 	system("cls");
 
+	DiscordSDK->Unload();
+	delete DiscordSDK;
+
 	std::cout << "Game isnt running\nPress anykey to close the program";
+	
 	std::cin.get();
 }
