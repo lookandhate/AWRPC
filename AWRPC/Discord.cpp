@@ -17,3 +17,8 @@ void Discord::Update(const char* state, const char* details, const char* mapName
 	discordPresence.largeImageKey = mapName;
 	Discord_UpdatePresence(&discordPresence);
 }
+
+void Discord::Unload()
+{
+	Discord_Shutdown();
+}

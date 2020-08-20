@@ -25,32 +25,32 @@ struct MapLocalization
 	
 	MapLocalization() :
 		m_rus("NULL"), m_eng("NULL"), m_mapType(MapType::EHangar){};
-	
-	MapLocalization(std::string eng, std::string rus, MapType maptype=MapType::EHangar) :
+	/// TODO: Replace Default value with garage
+	MapLocalization(std::string eng, std::string rus, MapType maptype=MapType::EPvPGlops) :
 		m_rus(rus), m_eng(eng), m_mapType(maptype){};
 
 };
 
 std::map<std::string, MapLocalization> levelLocalization = {
-	{"cus_alabino_polygon" , MapLocalization("Alabino", "Алабино")},
-	{"gar_base" , MapLocalization("Hangar", "Ангар")},
-	{"gar_eeu_lean" , MapLocalization("Hangar", "Ангар")},
-	{"gar_geom_thumbnail" , MapLocalization("Hangar", "Ангар")},
-	{"gar_outdoor" , MapLocalization("Hangar", "Ангар")},
-	{"gar_season_02" , MapLocalization("Hangar", "Ангар")},
-	{"gar_season_03" , MapLocalization("Hangar", "Ангар")},
-	{"gar_season_04" , MapLocalization("Hangar", "Ангар")},
-	{"gar_season_05" , MapLocalization("Hangar", "Ангар")},
-	{"gar_china" , MapLocalization("Hangar", "Ангар")},
-	{"gar_china_spring_festival" , MapLocalization("Hangar", "Ангар")},
-	{"gar_china_unniversary_alabino_polygon" , MapLocalization("Hangar", "Ангар")},
-	{"gar_holiday_02" , MapLocalization("Hangar", "Ангар")},
-	{"gar_holiday_03" , MapLocalization("Hangar", "Ангар")},
-	{"gar_holiday04" , MapLocalization("Hangar", "Ангар")},
-	{"gar_holiday05" , MapLocalization("Hangar", "Ангар")},
-	{"gar_holiday06" , MapLocalization("Hangar", "Ангар")},
-	{"gar_holiday" , MapLocalization("Hangar", "Ангар")},
-	{"gar_nevada" , MapLocalization("Hangar", "Ангар")},
+	{"cus_alabino_polygon" , MapLocalization("Alabino", "Алабино", MapType::EPvPGlops)},
+	{"gar_base" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_eeu_lean" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_geom_thumbnail" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_outdoor" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_season_02" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_season_03" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_season_04" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_season_05" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_china" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_china_spring_festival" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_china_unniversary_alabino_polygon" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_holiday_02" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_holiday_03" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_holiday04" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_holiday05" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_holiday06" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_holiday" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_nevada" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
 
 	{"glo01_barrendivide" , MapLocalization("Barren Divide", "Ткварчели", MapType::EGlops)},
 	{"glo05_ghostfield" , MapLocalization("Ghostfield", "Безмер")},
@@ -217,12 +217,14 @@ int main()
 
 	if (!MemUtils::IsGameRunning("armoredwarfare.exe"))
 	{
-		std::cout << "Game isn't running";
+		std::cout << "Game isn't running\n";
 		while (!MemUtils::IsGameRunning("armoredwarfare.exe"))
 		{
 			Sleep(10000);
 		}
 	}
+	
+	system("cls");
 	std::cout << "Game is running\n";
 	
 	std::cout << "Initializing discord client...";
@@ -269,8 +271,10 @@ int main()
 		// Check if we are in the hangar
 		if (levelLocalization[level].m_mapType == MapType::EHangar)
 		{
+			std::cout << levelLocalization[level].m_eng << "is type " << (int)levelLocalization[level].m_mapType << std::endl;
 			if (lang == Localization::EEng)
 				///TODO REPLACE small_logo_black
+				
 				DiscordSDK->Update("Chilling in hangar", "Testing API", "small_logo_black");
 			else
 				DiscordSDK->Update("Сидит в ангаре", "Проверка API", "small_logo_black");
@@ -293,7 +297,7 @@ int main()
 		std::cout << "Is Map read: " << bMapRead << " Level: " <<  level << std::endl << " Localized Level(ENG): " << levelLocalization[level].m_eng << std::endl << " Localized Level(RUS): " << levelLocalization[level].m_rus << std::endl;
 		Sleep(100);
 	}
-
+	system("cls");
 
 	std::cout << "Game isnt running\nPress anykey to close the program";
 	std::cin.get();

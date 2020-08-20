@@ -9,6 +9,6 @@ class Discord
 public:
 	void Initialize();
 	void Update(const char* state, const char* details, const char* mapName);
-
+	void Unload();
 };
 
