@@ -8,12 +8,12 @@ void Discord::Initialize()
 
 }
 
-void Discord::Update(const char* state, const char* details)
+void Discord::Update(const char* state, const char* details, const char* mapName)
 {
 	DiscordRichPresence discordPresence;
 	memset(&discordPresence, 0, sizeof(discordPresence));
 	discordPresence.state = state;
 	discordPresence.details = details;
-	discordPresence.largeImageKey = "small_logo_black";
+	discordPresence.largeImageKey = mapName;
 	Discord_UpdatePresence(&discordPresence);
 }

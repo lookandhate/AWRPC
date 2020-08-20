@@ -8,21 +8,25 @@
 #include <tchar.h>
 #include "../Discord.h"
 
-enum MapType
+enum class MapType
 {
 	EHangar = 0, EPvP, EGlops, EPvPGlops, EPvE
+};
+enum class Localization
+{
+	EEng = 0, ERu
 };
 
 struct MapLocalization
 {
 	const std::string m_eng;
 	const std::string m_rus;
-	MapType m_mapType = EHangar;
+	MapType m_mapType = MapType::EHangar;
 	
 	MapLocalization() :
-		m_rus("NULL"), m_eng("NULL"), m_mapType(EHangar){};
+		m_rus("NULL"), m_eng("NULL"), m_mapType(MapType::EHangar){};
 	
-	MapLocalization(std::string eng, std::string rus, MapType maptype=EHangar) :
+	MapLocalization(std::string eng, std::string rus, MapType maptype=MapType::EHangar) :
 		m_rus(rus), m_eng(eng), m_mapType(maptype){};
 
 };
@@ -48,7 +52,7 @@ std::map<std::string, MapLocalization> levelLocalization = {
 	{"gar_holiday" , MapLocalization("Hangar", "Ангар")},
 	{"gar_nevada" , MapLocalization("Hangar", "Ангар")},
 
-	{"glo01_barrendivide" , MapLocalization("Barren Divide", "Ткварчели")},
+	{"glo01_barrendivide" , MapLocalization("Barren Divide", "Ткварчели", MapType::EGlops)},
 	{"glo05_ghostfield" , MapLocalization("Ghostfield", "Безмер")},
 	{"glo06_narrows" , MapLocalization("Narrows", "Кошице")},
 	{"glo07_roughneck" , MapLocalization("Roughneck", "Надым")},
@@ -206,6 +210,10 @@ bool GetCurrentMap(HANDLE& gameHandle, LPVOID buffer, uintptr_t BaseAddress)
 
 int main()
 {
+	SetConsoleOutputCP(1251);
+
+	// Make possible to change Localization using command args
+	Localization lang = Localization::EEng;
 
 	if (!MemUtils::IsGameRunning("armoredwarfare.exe"))
 	{
@@ -241,7 +249,7 @@ int main()
 	std::cout << "Press Enter to begin" << std::endl;
 	std::cin.get();
 	DiscordSDK->Initialize();
-	while ((!MemUtils::IsGameRunning("armoredwarfare.exe")))
+	while ((MemUtils::IsGameRunning("armoredwarfare.exe")))
 	{
 		system("cls");
 		bool bMapRead = GetCurrentMap(gamehandle, &buffer, BaseAddress);
@@ -249,19 +257,44 @@ int main()
 		level = std::string(buffer);
 		int slash_index = level.find('/');
 		level = level.substr(0, slash_index);
-		std::string eulocalizedlevel = levelLocalization[level].m_eng;
-
-		if (levelLocalization[level].m_eng == "Hangar")
+		
+		std::string localizedlevel = levelLocalization[level].m_eng;
+		switch (lang)
 		{
-			DiscordSDK->Update("Chilling in hangar", "Testing API");
+		case Localization::ERu:
+			std::string eulocalizedlevel = levelLocalization[level].m_rus;
+			break;
 		}
 
-		std::string PlayingOnMapString = "Map " + levelLocalization[level].m_eng;
-		DiscordSDK->Update(PlayingOnMapString.c_str(), "Playing");
-
+		// Check if we are in the hangar
+		if (levelLocalization[level].m_mapType == MapType::EHangar)
+		{
+			if (lang == Localization::EEng)
+				///TODO REPLACE small_logo_black
+				DiscordSDK->Update("Chilling in hangar", "Testing API", "small_logo_black");
+			else
+				DiscordSDK->Update("Сидит в ангаре", "Проверка API", "small_logo_black");
+		}
+		// We are not in the hangar
+		else 
+		{
+			if (lang == Localization::EEng)
+			{
+				std::string PlayingOnMapString = "Map: " + levelLocalization[level].m_eng;
+				DiscordSDK->Update(PlayingOnMapString.c_str(), "Playing", level.c_str());
+			}
+			else
+			{
+				std::string PlayingOnMapString = "Карта: " + levelLocalization[level].m_rus;
+				DiscordSDK->Update(PlayingOnMapString.c_str(), "В бою", level.c_str());
+			}
+		}
+		
 		std::cout << "Is Map read: " << bMapRead << " Level: " <<  level << std::endl << " Localized Level(ENG): " << levelLocalization[level].m_eng << std::endl << " Localized Level(RUS): " << levelLocalization[level].m_rus << std::endl;
 		Sleep(100);
 	}
+
+
 	std::cout << "Game isnt running\nPress anykey to close the program";
 	std::cin.get();
 }
