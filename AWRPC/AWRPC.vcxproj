@@ -19,18 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Discord.cpp" />
     <ClCompile Include="discord\src\connection_win.cpp" />
     <ClCompile Include="discord\src\discord_register_win.cpp" />
     <ClCompile Include="discord\src\discord_rpc.cpp" />
     <ClCompile Include="discord\src\dllmain.cpp" />
     <ClCompile Include="discord\src\rpc_connection.cpp" />
     <ClCompile Include="discord\src\serialization.cpp" />
+    <ClCompile Include="src\Discord\Discord.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Discord.h" />
     <ClInclude Include="discord\include\discord_register.h" />
     <ClInclude Include="discord\include\discord_rpc.h" />
     <ClInclude Include="discord\src\backoff.h" />
@@ -38,6 +37,7 @@
     <ClInclude Include="discord\src\msg_queue.h" />
     <ClInclude Include="discord\src\rpc_connection.h" />
     <ClInclude Include="discord\src\serialization.h" />
+    <ClInclude Include="src\Discord\Discord.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="discord\src\discord_register_osx.m" />

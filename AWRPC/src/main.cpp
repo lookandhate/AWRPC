@@ -6,7 +6,7 @@
 #include "Windows.h"
 #include <tlhelp32.h>
 #include <tchar.h>
-#include "../Discord.h"
+#include "Discord/Discord.h"
 
 enum class MapType
 {
@@ -223,10 +223,10 @@ int main()
 			Sleep(10000);
 		}
 	}
-	
+
 	system("cls");
 	std::cout << "Game is running\n";
-	
+
 	std::cout << "Initializing discord client...";
 	/// Create DiscordSDK object and fill strings with temp data
 	Discord* DiscordSDK = new Discord;
@@ -236,7 +236,7 @@ int main()
 	/// Get Game PID
 	DWORD PID = MemUtils::GetPID("armoredwarfare.exe");
 	std::cout << "Game PID is: " << PID << std::endl;
-	
+
 	/// Get base address of armoredwarfare.exe module
 	auto BaseAddress = MemUtils::GetBaseAddr(PID, "armoredwarfare.exe");
 	std::cout << "Base address: " << BaseAddress << std::endl;
@@ -255,11 +255,11 @@ int main()
 	{
 		system("cls");
 		bool bMapRead = GetCurrentMap(gamehandle, &buffer, BaseAddress);
-		
+
 		level = std::string(buffer);
 		int slash_index = level.find('/');
 		level = level.substr(0, slash_index);
-		
+
 		std::string localizedlevel = levelLocalization[level].m_eng;
 		switch (lang)
 		{
@@ -274,13 +274,13 @@ int main()
 			std::cout << levelLocalization[level].m_eng << "is type " << (int)levelLocalization[level].m_mapType << std::endl;
 			if (lang == Localization::EEng)
 				///TODO REPLACE small_logo_black
-				
+
 				DiscordSDK->Update("Chilling in hangar", "Testing API", "small_logo_black");
 			else
-				DiscordSDK->Update("Сидит в ангаре", "Проверка API", "small_logo_black");
+				DiscordSDK->Update("В ангаре", "Проверка API", "small_logo_black");
 		}
 		// We are not in the hangar
-		else 
+		else
 		{
 			if (lang == Localization::EEng)
 			{
@@ -293,8 +293,8 @@ int main()
 				DiscordSDK->Update(PlayingOnMapString.c_str(), "В бою", level.c_str());
 			}
 		}
-		
-		std::cout << "Is Map read: " << bMapRead << " Level: " <<  level << std::endl << " Localized Level(ENG): " << levelLocalization[level].m_eng << std::endl << " Localized Level(RUS): " << levelLocalization[level].m_rus << std::endl;
+
+		std::cout << "Is Map read: " << bMapRead << " Level: " << level << std::endl << " Localized Level(ENG): " << levelLocalization[level].m_eng << std::endl << " Localized Level(RUS): " << levelLocalization[level].m_rus << std::endl;
 		Sleep(100);
 	}
 	system("cls");
@@ -303,6 +303,6 @@ int main()
 	delete DiscordSDK;
 
 	std::cout << "Game isnt running\nPress anykey to close the program";
-	
+
 	std::cin.get();
 }

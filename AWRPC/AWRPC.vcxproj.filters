@@ -54,7 +54,7 @@
     <ClCompile Include="discord\src\serialization.cpp">
       <Filter>Source Files\DiscordSDK\src</Filter>
     </ClCompile>
-    <ClCompile Include="Discord.cpp">
+    <ClCompile Include="src\Discord\Discord.cpp">
       <Filter>Source Files\Class</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +80,7 @@
     <ClInclude Include="discord\src\serialization.h">
       <Filter>Source Files\DiscordSDK\src</Filter>
     </ClInclude>
-    <ClInclude Include="Discord.h">
+    <ClInclude Include="src\Discord\Discord.h">
       <Filter>Source Files\Class</Filter>
     </ClInclude>
   </ItemGroup>
