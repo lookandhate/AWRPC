@@ -75,7 +75,7 @@ std::map<std::string, MapLocalization> levelLocalization = {
 };
 
 namespace MemUtils {
-	constexpr uintptr_t MAP_NAME_MEMORY_ADDRESS = 53356283;
+	constexpr uintptr_t MAP_NAME_MEMORY_ADDRESS = 0x333758B;
 
 	bool IsGameRunning(const char* const executableName)
 	{
