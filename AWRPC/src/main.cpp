@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <ctime>
 
 #include "Windows.h"
 #include <tlhelp32.h>
@@ -228,7 +229,8 @@ int main()
 	std::cout << "Initializing discord client...";
 	/// Create DiscordSDK object and fill strings with temp data
 	Discord* DiscordSDK = new Discord;
-	char buffer[20] = "Nothing";
+	char buffer[150] = "Nothing";
+	char buffer_for_old[150] = "Nothing";
 	std::string level = "Nothing";
 
 	/// Get Game PID
@@ -248,6 +250,8 @@ int main()
 
 	std::cout << "Press Enter to begin" << std::endl;
 	std::cin.get();
+
+	std::time_t timestamp = std::time(nullptr);
 	DiscordSDK->Initialize();
 	while ((MemUtils::IsGameRunning("armoredwarfare.exe")))
 	{
@@ -255,6 +259,17 @@ int main()
 		bool bMapRead = GetCurrentMap(gamehandle, &buffer, BaseAddress);
 
 		level = std::string(buffer);
+		std::string old_level = std::string(buffer_for_old);
+		if(level != old_level)
+		{
+			strcpy_s(buffer_for_old, buffer);
+			old_level = level;
+			timestamp = std::time(nullptr);
+
+		}
+
+
+
 		int slash_index = level.find('/');
 		level = level.substr(0, slash_index);
 
@@ -273,9 +288,9 @@ int main()
 			if (lang == Localization::EEng)
 				///TODO REPLACE small_logo_black
 
-				DiscordSDK->Update("Chilling in hangar", "Testing API", "small_logo_black");
+				DiscordSDK->Update("Chilling in hangar", "Testing API", "small_logo_black", (int64_t)timestamp);
 			else
-				DiscordSDK->Update("В ангаре", "Проверка API", "small_logo_black");
+				DiscordSDK->Update("В ангаре", "Проверка API", "small_logo_black", (int64_t)timestamp);
 		}
 		// We are not in the hangar
 		else
@@ -283,12 +298,12 @@ int main()
 			if (lang == Localization::EEng)
 			{
 				std::string PlayingOnMapString = "Map: " + levelLocalization[level].m_eng;
-				DiscordSDK->Update(PlayingOnMapString.c_str(), "Playing", level.c_str());
+				DiscordSDK->Update(PlayingOnMapString.c_str(), "Playing", level.c_str(), (int64_t)timestamp);
 			}
 			else
 			{
 				std::string PlayingOnMapString = "Карта: " + levelLocalization[level].m_rus;
-				DiscordSDK->Update(PlayingOnMapString.c_str(), "В бою", level.c_str());
+				DiscordSDK->Update(PlayingOnMapString.c_str(), "В бою", level.c_str(), (int64_t)timestamp);
 			}
 		}
 
