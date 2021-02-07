@@ -3,18 +3,16 @@
 #include "discord_rpc.h"
 #include "Windows.h"
 #include "../Helper.hpp"
+#include <string>
 
 
 class Discord
 {
 public:
 	void Initialize();
-<<<<<<< HEAD
 	void Update(const char* state, const char* details, const char* mapName, MapType map = MapType::EHangar);
-	char* GameModeEnumToCharCoverName(MapType maptype);
-=======
-	void Update(const char* state, const char* details, const char* mapName, int64_t startTimeStamp);
->>>>>>> feauture/time
+	std::string GameModeEnumToCharCoverName(MapType maptype);
+	void Update(const char* state, const char* details, const char* mapName, int64_t startTimeStamp, MapType map = MapType::EHangar);
 	void Unload();
 };
 

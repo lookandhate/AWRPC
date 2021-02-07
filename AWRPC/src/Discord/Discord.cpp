@@ -8,40 +8,40 @@ void Discord::Initialize()
 
 }
 
-<<<<<<< HEAD
-void Discord::Update(const char* state, const char* details, const char* mapName, MapType map)
-=======
-void Discord::Update(const char* state, const char* details, const char* mapName, int64_t startTimeStamp)
->>>>>>> feauture/time
+void Discord::Update(const char* state, const char* details, const char* mapName, int64_t startTimeStamp, MapType maptype)
+
 {
 	DiscordRichPresence discordPresence;
 	memset(&discordPresence, 0, sizeof(discordPresence));
+	auto map_cover = GameModeEnumToCharCoverName(maptype);
 	discordPresence.state = state;
 	discordPresence.details = details;
 	discordPresence.largeImageKey = mapName;
 	discordPresence.startTimestamp = startTimeStamp;
+	discordPresence.smallImageKey = map_cover.c_str();
 	Discord_UpdatePresence(&discordPresence);
 }
 
-char* Discord::GameModeEnumToCharCoverName(MapType maptype)
+std::string Discord::GameModeEnumToCharCoverName(MapType maptype)
 {
-	char* map_cover = new char;
+	std::string map_cover;
 	switch (maptype)
 	{
 	case MapType::EPvP:
 
-		strcpy_s(map_cover, "pvp-purple");
-		return map_cover;
+		map_cover = std::string("pvp-purple");
+		//return map_cover;
 	case MapType::EGlops:
-		strcpy_s(map_cover, "glops");
-		return map_cover;
+		map_cover = std::string("glops");
+		//return map_cover;
 	case MapType::EPvE:
-		strcpy_s(map_cover, "pve");
-		return map_cover;
+		map_cover = std::string("pve");
+		//return map_cover;
 	default:
-		strcpy_s(map_cover, "small_logo_white");
-		return map_cover;
+		map_cover = std::string("small_logo_white");
+		//return map_cover;
 	}
+	return map_cover;
 }
 
 void Discord::Unload()
