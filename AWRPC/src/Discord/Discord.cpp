@@ -8,13 +8,14 @@ void Discord::Initialize()
 
 }
 
-void Discord::Update(const char* state, const char* details, const char* mapName)
+void Discord::Update(const char* state, const char* details, const char* mapName, int64_t startTimeStamp)
 {
 	DiscordRichPresence discordPresence;
 	memset(&discordPresence, 0, sizeof(discordPresence));
 	discordPresence.state = state;
 	discordPresence.details = details;
 	discordPresence.largeImageKey = mapName;
+	discordPresence.startTimestamp = startTimeStamp;
 	Discord_UpdatePresence(&discordPresence);
 }
 
