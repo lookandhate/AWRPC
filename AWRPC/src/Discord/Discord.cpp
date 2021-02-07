@@ -42,7 +42,7 @@ std::string Discord::GameModeEnumToCharCoverName(MapType maptype)
 		map_cover = std::string("cus_alabino_polygon");
 		return map_cover;
 	case MapType::EPvPGlops:
-		map_cover = std::string("pvp-purple");
+		map_cover = std::string("pvp");
 		return map_cover;
 
 	default:
