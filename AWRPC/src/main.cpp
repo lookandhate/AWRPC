@@ -41,6 +41,7 @@ std::map<std::string, MapLocalization> levelLocalization = {
 	{"gar_season_03" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
 	{"gar_season_04" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
 	{"gar_season_05" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
+	{"gar_season_06" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
 	{"gar_china" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
 	{"gar_china_spring_festival" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
 	{"gar_china_unniversary_alabino_polygon" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
@@ -271,8 +272,6 @@ int main()
 			timestamp = std::time(nullptr);
 
 		}
-
-
 
 		int slash_index = level.find('/');
 		level = level.substr(0, slash_index);
