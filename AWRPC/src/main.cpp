@@ -10,6 +10,8 @@
 #include "Discord/Discord.h"
 #include "Helper.hpp"
 
+
+
 enum class Localization
 {
 	EEng = 0, ERu
@@ -80,6 +82,7 @@ std::map<std::string, MapLocalization> levelLocalization = {
 
 namespace MemUtils {
 	constexpr uintptr_t MAP_NAME_MEMORY_ADDRESS = 0x333758B;
+	constexpr uintptr_t NICKNAME_MEMORY_ADDRESS = 0x3130A5C;
 
 	bool IsGameRunning(const char* const executableName)
 	{
@@ -212,6 +215,21 @@ bool GetCurrentMap(HANDLE& gameHandle, LPVOID buffer, uintptr_t BaseAddress)
 
 }
 
+bool GetPlayerNickname(HANDLE& gameHandle, LPVOID buffer, uintptr_t BaseAddress)
+{
+#ifdef _DEBUG
+	std::cout << "Reading memory" << std::endl;
+	std::cout << "Base address: " << BaseAddress << " Offset: " << MemUtils::MAP_NAME_MEMORY_ADDRESS;
+	std::cout << " Base + Offset = " << BaseAddress + MemUtils::MAP_NAME_MEMORY_ADDRESS << std::endl;
+#endif //_DEBUG
+
+	SIZE_T size_read;
+	return !!::ReadProcessMemory(gameHandle, LPCVOID(BaseAddress + MemUtils::NICKNAME_MEMORY_ADDRESS), buffer, 20, &size_read) && size_read > 0;
+
+}
+
+
+
 int main()
 {
 	SetConsoleOutputCP(1251);
@@ -236,6 +254,7 @@ int main()
 	Discord* DiscordSDK = new Discord;
 	char buffer[150] = "Nothing";
 	char buffer_for_old[150] = "Nothing";
+	char nickname_buffer[150] = "NicknamePlaceholder";
 	std::string level = "Nothing";
 
 	/// Get Game PID
@@ -262,6 +281,7 @@ int main()
 	{
 		system("cls");
 		bool bMapRead = GetCurrentMap(gamehandle, &buffer, BaseAddress);
+		bool bNicknameRead = GetPlayerNickname(gamehandle, &nickname_buffer, BaseAddress);
 
 		level = std::string(buffer);
 		std::string old_level = std::string(buffer_for_old);
@@ -289,9 +309,11 @@ int main()
 		{
 			std::cout << levelLocalization[level].m_eng << "is type " << (int)levelLocalization[level].m_mapType << std::endl;
 			if (lang == Localization::EEng)
+			{
 				///TODO REPLACE small_logo_black
-
-				DiscordSDK->Update("Chilling in hangar", "Testing API", "small_logo_black", (int64_t)timestamp);
+				std::string HangarSitting = std::string(nickname_buffer) + std::string(" is sitting in hangar");
+				DiscordSDK->Update(HangarSitting.c_str(), "Testing API", "small_logo_black", (int64_t)timestamp);
+			}
 			else
 				DiscordSDK->Update("В ангаре", "Проверка API", "small_logo_black", (int64_t)timestamp);
 		}

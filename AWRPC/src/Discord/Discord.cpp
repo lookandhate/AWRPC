@@ -1,5 +1,5 @@
 #include "Discord.h"
-
+const char* MADE_BY = "Available at github.com/lookandhate/AWRPC";
 void Discord::Initialize()
 {
 	DiscordEventHandlers Handle;
@@ -17,6 +17,7 @@ void Discord::Update(const char* state, const char* details, const char* mapName
 	discordPresence.state = state;
 	discordPresence.details = details;
 	discordPresence.largeImageKey = mapName;
+	discordPresence.largeImageText = MADE_BY;
 	discordPresence.startTimestamp = startTimeStamp;
 	discordPresence.smallImageKey = map_cover.c_str();
 	Discord_UpdatePresence(&discordPresence);
