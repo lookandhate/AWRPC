@@ -1,0 +1,17 @@
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/CMakeFiles/install/local.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/CMakeFiles/install.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/CMakeFiles/edit_cache.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/CMakeFiles/rebuild_cache.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/CMakeFiles/list_install_components.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/src/CMakeFiles/rebuild_cache.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/src/CMakeFiles/discord-rpc.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/src/CMakeFiles/install/local.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/src/CMakeFiles/install.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/src/CMakeFiles/edit_cache.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/src/CMakeFiles/list_install_components.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/examples/send-presence/CMakeFiles/send-presence.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/examples/send-presence/CMakeFiles/install/local.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/examples/send-presence/CMakeFiles/install.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/examples/send-presence/CMakeFiles/edit_cache.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/examples/send-presence/CMakeFiles/rebuild_cache.dir
+C:/Users/princ/Desktop/DEV/CPP/AWRPC/AWRPC/discord/out/build/x64-Debug (default)/examples/send-presence/CMakeFiles/list_install_components.dir

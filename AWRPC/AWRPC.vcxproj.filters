@@ -83,6 +83,9 @@
     <ClInclude Include="src\Discord\Discord.h">
       <Filter>Source Files\Class</Filter>
     </ClInclude>
+    <ClInclude Include="src\Helper.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="discord\src\discord_register_osx.m">

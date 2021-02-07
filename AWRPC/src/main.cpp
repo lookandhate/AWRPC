@@ -7,11 +7,8 @@
 #include <tlhelp32.h>
 #include <tchar.h>
 #include "Discord/Discord.h"
+#include "Helper.hpp"
 
-enum class MapType
-{
-	EHangar = 0, EPvP, EGlops, EPvPGlops, EPvE
-};
 enum class Localization
 {
 	EEng = 0, ERu
@@ -53,25 +50,26 @@ std::map<std::string, MapLocalization> levelLocalization = {
 	{"gar_nevada" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
 
 	{"glo01_barrendivide" , MapLocalization("Barren Divide", "Ткварчели", MapType::EGlops)},
-	{"glo05_ghostfield" , MapLocalization("Ghostfield", "Безмер")},
-	{"glo06_narrows" , MapLocalization("Narrows", "Кошице")},
-	{"glo07_roughneck" , MapLocalization("Roughneck", "Надым")},
-	{"glo08_china" , MapLocalization("Baise", "Байсэ")},
-	{"glo09_grassyfields" , MapLocalization("Pleternica", "Плетерница")},
-	{"glo11_alpine" , MapLocalization("Grindelwald", "Гриндельвальд")},
-	{"glo17_coruscant" , MapLocalization("Moscow", "Москва")},
-	{"pvp01_coldstrike" , MapLocalization("Cold Strike", "Гори")},
-	{"pvp02_riverpoint" , MapLocalization("River Point", "Мостар")},
-	{"pvp05_pipelines" , MapLocalization("Pipelines", "Эль-Ариш")},
-	{"pvp06_portstorm" , MapLocalization("Port Storm", "Умм-Каср")},
-	{"pvp07_coastalthreat" , MapLocalization("Coastal Threat", "Батуми")},
-	{"pvp09_reactor" , MapLocalization("Reactor", "Уризар")},
-	{"pvp13_desertcrossing" , MapLocalization("Desert Crossing", "Суэцкий канал")},
-	{"pvp14_lostisland" , MapLocalization("Lost Island", "Палау")},
-	{"pvp15_frontline" , MapLocalization("Front Line", "Виста")},
-	{"pvp18_canyon" , MapLocalization("Chemical Plant", "Аламо")},
-	{"pvp19_tropicalcoast" , MapLocalization("Tropical Coast", "Порт-Антонио")},
-	{"pvp20_panamacanal" , MapLocalization("Waterway", "Панамский канал")},
+	{"glo05_ghostfield" , MapLocalization("Ghostfield", "Безмер", MapType::EPvPGlops)},
+	{"glo06_narrows" , MapLocalization("Narrows", "Кошице", MapType::EPvPGlops)},
+	{"glo07_roughneck" , MapLocalization("Roughneck", "Надым", MapType::EPvPGlops)},
+	{"glo08_china" , MapLocalization("Baise", "Байсэ", MapType::EPvP)},
+	{"glo09_grassyfields" , MapLocalization("Pleternica", "Плетерница", MapType::EPvP)},
+	{"glo11_alpine" , MapLocalization("Grindelwald", "Гриндельвальд", MapType::EGlops)},
+	{"glo17_coruscant" , MapLocalization("Moscow", "Москва", MapType::EPvP)},
+	{"pvp01_coldstrike" , MapLocalization("Cold Strike", "Гори", MapType::EPvP)},
+	{"pvp02_riverpoint" , MapLocalization("River Point", "Мостар", MapType::EPvP)},
+	{"pvp05_pipelines" , MapLocalization("Pipelines", "Эль-Ариш", MapType::EPvP)},
+	{"pvp06_portstorm" , MapLocalization("Port Storm", "Умм-Каср", MapType::EPvP)},
+	{"pvp07_coastalthreat" , MapLocalization("Coastal Threat", "Батуми", MapType::EPvP)},
+	{"pvp09_reactor" , MapLocalization("Reactor", "Уризар", MapType::EPvP)},
+	{"pvp13_desertcrossing" , MapLocalization("Desert Crossing", "Суэцкий канал", MapType::EGlops)},
+	{"pvp14_lostisland" , MapLocalization("Lost Island", "Палау", MapType::EPvP)},
+	{"pvp15_frontline" , MapLocalization("Front Line", "Виста", MapType::EPvP)},
+	{"pvp18_canyon" , MapLocalization("Chemical Plant", "Аламо", MapType::EPvP)},
+	{"pvp19_tropicalcoast" , MapLocalization("Tropical Coast", "Порт-Антонио", MapType::EPvP)},
+	{"pvp20_panamacanal" , MapLocalization("Waterway", "Панамский канал", MapType::EPvP)},
+	{"glo18_jakku" , MapLocalization("Al Dabbah", "Ткварчели", MapType::EPvP)},
 };
 
 namespace MemUtils {

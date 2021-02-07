@@ -37,6 +37,7 @@
     <ClInclude Include="discord\src\msg_queue.h" />
     <ClInclude Include="discord\src\rpc_connection.h" />
     <ClInclude Include="discord\src\serialization.h" />
+    <ClInclude Include="src\Helper.hpp" />
     <ClInclude Include="src\Discord\Discord.h" />
   </ItemGroup>
   <ItemGroup>
