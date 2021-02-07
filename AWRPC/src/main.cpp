@@ -30,7 +30,9 @@ struct MapLocalization
 };
 
 std::map<std::string, MapLocalization> levelLocalization = {
+	// Special
 	{"cus_alabino_polygon" , MapLocalization("Alabino", "Алабино", MapType::EPvPGlops)},
+	// Hangars
 	{"gar_base" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
 	{"gar_eeu_lean" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
 	{"gar_geom_thumbnail" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
@@ -49,7 +51,8 @@ std::map<std::string, MapLocalization> levelLocalization = {
 	{"gar_holiday06" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
 	{"gar_holiday" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
 	{"gar_nevada" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-
+	
+	// PvP and GLOPS maps 
 	{"glo01_barrendivide" , MapLocalization("Barren Divide", "Ткварчели", MapType::EGlops)},
 	{"glo05_ghostfield" , MapLocalization("Ghostfield", "Безмер", MapType::EPvPGlops)},
 	{"glo06_narrows" , MapLocalization("Narrows", "Кошице", MapType::EPvPGlops)},
@@ -57,6 +60,7 @@ std::map<std::string, MapLocalization> levelLocalization = {
 	{"glo08_china" , MapLocalization("Baise", "Байсэ", MapType::EPvP)},
 	{"glo09_grassyfields" , MapLocalization("Pleternica", "Плетерница", MapType::EPvP)},
 	{"glo11_alpine" , MapLocalization("Grindelwald", "Гриндельвальд", MapType::EGlops)},
+	{"glo12_eutown" , MapLocalization("Salzburg", "Зальцбург", MapType::EPvPGlops)},
 	{"glo17_coruscant" , MapLocalization("Moscow", "Москва", MapType::EPvP)},
 	{"pvp01_coldstrike" , MapLocalization("Cold Strike", "Гори", MapType::EPvP)},
 	{"pvp02_riverpoint" , MapLocalization("River Point", "Мостар", MapType::EPvP)},
@@ -298,12 +302,12 @@ int main()
 			if (lang == Localization::EEng)
 			{
 				std::string PlayingOnMapString = "Map: " + levelLocalization[level].m_eng;
-				DiscordSDK->Update(PlayingOnMapString.c_str(), "Playing", level.c_str(), (int64_t)timestamp);
+				DiscordSDK->Update(PlayingOnMapString.c_str(), "Playing", level.c_str(), (int64_t)timestamp, levelLocalization[level].m_mapType);
 			}
 			else
 			{
 				std::string PlayingOnMapString = "Карта: " + levelLocalization[level].m_rus;
-				DiscordSDK->Update(PlayingOnMapString.c_str(), "В бою", level.c_str(), (int64_t)timestamp);
+				DiscordSDK->Update(PlayingOnMapString.c_str(), "В бою", level.c_str(), (int64_t)timestamp, levelLocalization[level].m_mapType);
 			}
 		}
 
