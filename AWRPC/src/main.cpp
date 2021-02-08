@@ -11,6 +11,16 @@
 #include "Helper/Helper.hpp"
 
 
+// Defines how often check is game running and for map updates
+#ifdef _DEBUG
+#define INTERVAL_CHECK_GAME_IS_RUNNING 10000
+#define INTERVAL_UPDATE_MAP_INFO 100
+
+#else
+#define INTERVAL_CHECK_GAME_IS_RUNNING 30000
+#define INTERVAL_UPDATE_MAP_INFO 10000
+#endif // _DEBUG
+
 
 enum class Localization
 {
@@ -230,7 +240,7 @@ int main()
 		std::cout << "Game isn't running\n";
 		while (!MemUtils::IsGameRunning("armoredwarfare.exe"))
 		{
-			Sleep(10000);
+			Sleep(INTERVAL_CHECK_GAME_IS_RUNNING);
 		}
 	}
 
@@ -331,7 +341,7 @@ int main()
 		std::cout << "Is Map read: " << bMapRead << " Level: " << level << std::endl << " Localized Level(ENG): " << levelLocalization[level].m_eng << std::endl << " Localized Level(RUS): " << levelLocalization[level].m_rus << std::endl;
 
 #endif // _DEBUG
-		Sleep(100);
+		Sleep(INTERVAL_UPDATE_MAP_INFO);
 	}
 	system("cls");
 
