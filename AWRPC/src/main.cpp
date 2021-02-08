@@ -265,9 +265,14 @@ int main()
 
 	std::time_t timestamp = std::time(nullptr);
 	DiscordSDK->Initialize();
+	system("cls");
+	std::cout << "Working....\n";
 	while ((MemUtils::IsGameRunning("armoredwarfare.exe")))
 	{
+#ifdef _DEBUG
 		system("cls");
+#endif // _DEBUG
+
 		bool bMapRead = GetCurrentMap(gamehandle, &buffer, BaseAddress);
 		bool bNicknameRead = GetPlayerNickname(gamehandle, &nickname_buffer, BaseAddress);
 
@@ -295,7 +300,10 @@ int main()
 		// Check if we are in the hangar
 		if (levelLocalization[level].m_mapType == MapType::EHangar)
 		{
+#ifdef _DEBUG
 			std::cout << levelLocalization[level].m_eng << "is type " << (int)levelLocalization[level].m_mapType << std::endl;
+#endif // _DEBUG
+
 			if (lang == Localization::EEng)
 			{
 				///TODO REPLACE small_logo_black
@@ -319,8 +327,10 @@ int main()
 				DiscordSDK->Update(PlayingOnMapString.c_str(), "В бою", level.c_str(), (int64_t)timestamp, levelLocalization[level].m_mapType);
 			}
 		}
-
+#ifdef _DEBUG
 		std::cout << "Is Map read: " << bMapRead << " Level: " << level << std::endl << " Localized Level(ENG): " << levelLocalization[level].m_eng << std::endl << " Localized Level(RUS): " << levelLocalization[level].m_rus << std::endl;
+
+#endif // _DEBUG
 		Sleep(100);
 	}
 	system("cls");
