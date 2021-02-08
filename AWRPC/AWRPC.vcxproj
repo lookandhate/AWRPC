@@ -25,6 +25,7 @@
     <ClCompile Include="discord\src\dllmain.cpp" />
     <ClCompile Include="discord\src\rpc_connection.cpp" />
     <ClCompile Include="discord\src\serialization.cpp" />
+    <ClCompile Include="src\Helper\Helper.cpp" />
     <ClCompile Include="src\Discord\Discord.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Utils.cpp" />
@@ -37,7 +38,7 @@
     <ClInclude Include="discord\src\msg_queue.h" />
     <ClInclude Include="discord\src\rpc_connection.h" />
     <ClInclude Include="discord\src\serialization.h" />
-    <ClInclude Include="src\Helper.hpp" />
+    <ClInclude Include="src\Helper\Helper.hpp" />
     <ClInclude Include="src\Discord\Discord.h" />
   </ItemGroup>
   <ItemGroup>
@@ -111,13 +112,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\bin</OutDir>
     <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\Intermidiate</IntDir>
-    <IncludePath>$(ProjectDir)rapidjson;$(ProjectDir)discord\src;$(ProjectDir)discord\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)rapidjson;$(ProjectDir)discord\src;$(ProjectDir)discord\include;$(ProjectDir)src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\bin</OutDir>
     <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\Intermidiate</IntDir>
-    <IncludePath>$(ProjectDir)rapidjson;$(ProjectDir)discord\src;$(ProjectDir)discord\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)rapidjson;$(ProjectDir)discord\src;$(ProjectDir)discord\include;$(ProjectDir)src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

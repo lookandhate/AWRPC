@@ -57,6 +57,9 @@
     <ClCompile Include="src\Discord\Discord.cpp">
       <Filter>Source Files\Class</Filter>
     </ClCompile>
+    <ClCompile Include="src\Helper\Helper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="discord\include\discord_register.h">
@@ -83,7 +86,7 @@
     <ClInclude Include="src\Discord\Discord.h">
       <Filter>Source Files\Class</Filter>
     </ClInclude>
-    <ClInclude Include="src\Helper.hpp">
+    <ClInclude Include="src\Helper\Helper.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

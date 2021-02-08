@@ -8,7 +8,7 @@
 #include <tlhelp32.h>
 #include <tchar.h>
 #include "Discord/Discord.h"
-#include "Helper.hpp"
+#include "Helper/Helper.hpp"
 
 
 
@@ -17,19 +17,7 @@ enum class Localization
 	EEng = 0, ERu
 };
 
-struct MapLocalization
-{
-	const std::string m_eng;
-	const std::string m_rus;
-	MapType m_mapType = MapType::EHangar;
-	
-	MapLocalization() :
-		m_rus("NULL"), m_eng("NULL"), m_mapType(MapType::EHangar){};
-	/// TODO: Replace Default value with garage
-	MapLocalization(std::string eng, std::string rus, MapType maptype=MapType::EPvPGlops) :
-		m_rus(rus), m_eng(eng), m_mapType(maptype){};
 
-};
 
 std::map<std::string, MapLocalization> levelLocalization = {
 	// Special
@@ -293,7 +281,7 @@ int main()
 
 		}
 
-		int slash_index = level.find('/');
+		size_t slash_index = level.find('/');
 		level = level.substr(0, slash_index);
 
 		std::string localizedlevel = levelLocalization[level].m_eng;
