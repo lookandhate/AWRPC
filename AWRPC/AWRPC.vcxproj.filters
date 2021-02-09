@@ -57,7 +57,10 @@
     <ClCompile Include="src\Discord\Discord.cpp">
       <Filter>Source Files\Class</Filter>
     </ClCompile>
-    <ClCompile Include="src\Helper\Helper.cpp">
+    <ClCompile Include="src\Helpers\Helper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Helpers\Memutils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,8 +89,11 @@
     <ClInclude Include="src\Discord\Discord.h">
       <Filter>Source Files\Class</Filter>
     </ClInclude>
-    <ClInclude Include="src\Helper\Helper.hpp">
+    <ClInclude Include="src\Helpers\Helper.hpp">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Helpers\Memutils.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

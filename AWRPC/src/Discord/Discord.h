@@ -2,7 +2,7 @@
 #include "discord_register.h"
 #include "discord_rpc.h"
 #include "Windows.h"
-#include "Helper/Helper.hpp"
+#include "Helpers/Helper.hpp"
 #include <string>
 
 

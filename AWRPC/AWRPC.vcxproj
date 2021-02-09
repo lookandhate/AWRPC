@@ -25,8 +25,9 @@
     <ClCompile Include="discord\src\dllmain.cpp" />
     <ClCompile Include="discord\src\rpc_connection.cpp" />
     <ClCompile Include="discord\src\serialization.cpp" />
-    <ClCompile Include="src\Helper\Helper.cpp" />
+    <ClCompile Include="src\Helpers\Helper.cpp" />
     <ClCompile Include="src\Discord\Discord.cpp" />
+    <ClCompile Include="src\Helpers\Memutils.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Utils.cpp" />
   </ItemGroup>
@@ -38,8 +39,9 @@
     <ClInclude Include="discord\src\msg_queue.h" />
     <ClInclude Include="discord\src\rpc_connection.h" />
     <ClInclude Include="discord\src\serialization.h" />
-    <ClInclude Include="src\Helper\Helper.hpp" />
+    <ClInclude Include="src\Helpers\Helper.hpp" />
     <ClInclude Include="src\Discord\Discord.h" />
+    <ClInclude Include="src\Helpers\Memutils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="discord\src\discord_register_osx.m" />
