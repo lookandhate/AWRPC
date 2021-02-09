@@ -41,6 +41,7 @@
     <ClInclude Include="discord\src\serialization.h" />
     <ClInclude Include="src\Helpers\Helper.hpp" />
     <ClInclude Include="src\Discord\Discord.h" />
+    <ClInclude Include="src\Helpers\logger.h" />
     <ClInclude Include="src\Helpers\Memutils.h" />
   </ItemGroup>
   <ItemGroup>

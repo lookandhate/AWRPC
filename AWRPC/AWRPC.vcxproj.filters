@@ -95,6 +95,9 @@
     <ClInclude Include="src\Helpers\Memutils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Helpers\logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="discord\src\discord_register_osx.m">
