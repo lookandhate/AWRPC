@@ -1,4 +1,4 @@
-#ifndef LOGURU_INCLUDED
+#ifndef LOGURU_INCLUDED_H
 #include "loguru/loguru.cpp"
-#define LOGURU_INCLUDED
+#define LOGURU_INCLUDED_H
 #endif

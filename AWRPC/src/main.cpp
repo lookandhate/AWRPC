@@ -12,7 +12,8 @@
 
 #include "Helpers/Helper.hpp"
 #include "Helpers/Memutils.h"
-#include "Helpers/logger.h"
+//#include "Helpers/logger.h"
+
 
 // Defines how often check is game running and for map updates
 #ifdef _DEBUG
@@ -24,6 +25,8 @@
 #define INTERVAL_UPDATE_MAP_INFO 10000
 #endif // _DEBUG
 
+
+#define VERSION 1.1
 
 enum class Localization
 {
@@ -132,27 +135,7 @@ int main(int argc, char* argv[])
 
 	std::string level = "Nothing";
 
-	/// Get Game PID
-	LOG_F(INFO, "Getting game PID...");
-	DWORD PID = MemUtils::GetPID("armoredwarfare.exe");
-	LOG_F(INFO, "Game PID is %d", PID);
-	//std::cout << "Game PID is: " << PID << std::endl;
-
-
-	/// Get base address of armoredwarfare.exe module
-	LOG_F(INFO, "Getting game Base address....");
-	auto BaseAddress = MemUtils::GetBaseAddr(PID, "armoredwarfare.exe");
-	//std::cout << "Base address: " << BaseAddress << std::endl;
-	LOG_F(INFO, "Game Base address is 0x%d", BaseAddress);
-
-
-	/// Get game handle
-	//std::cout << "Getting game handle.... ";
-	LOG_F(INFO, "Getting game handle....");
-	HANDLE gamehandle;
-	bool bHandleStatus = MemUtils::GetGameHandle(gamehandle, PID);
-	LOG_F(INFO, "Handle Status: %d", bHandleStatus);
-	//std::cout << "Handle Status:" << bHandleStatus << std::endl;
+	CGameMemory GameMemory = CGameMemory();
 
 	std::cout << "Press Enter to begin" << std::endl;
 	std::cin.get();
@@ -171,13 +154,13 @@ int main(int argc, char* argv[])
 #endif // _DEBUG
 		LOG_F(INFO, "Reading current map....");
 		
-		bool bMapRead = GetCurrentMap(gamehandle, &buffer, BaseAddress);
+		bool bMapRead = GameMemory.GetCurrentMap(&buffer);
 		if (!bMapRead)
 			LOG_F(ERROR, "Could not read current map");
 		LOG_F(INFO, "Map has been read successfully");
 		
 		LOG_F(INFO, "Reading nickname....");
-		bool bNicknameRead = GetPlayerNickname(gamehandle, &nickname_buffer, BaseAddress);
+		bool bNicknameRead = GameMemory.GetPlayerNickname(&nickname_buffer);
 		if (!bNicknameRead)
 			LOG_F(ERROR, "Could not read nickname");
 		LOG_F(INFO, "Nickname has been read successfully");
@@ -250,9 +233,11 @@ int main(int argc, char* argv[])
 	}
 	system("cls");
 
+
+	LOG_F(INFO, "Game is not running...");
+	LOG_F(INFO, "Unloading DiscordSDK");
 	DiscordSDK->Unload();
 	delete DiscordSDK;
-
 	std::cout << "Game is not running\nPress any key to close the program";
 
 	std::cin.get();
