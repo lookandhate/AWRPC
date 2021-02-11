@@ -87,11 +87,11 @@ std::map<std::string, MapLocalization> levelLocalization = {
 
 void wait_for_game_to_launch()
 {
-	if (!MemUtils::IsGameRunning("armoredwarfare.exe"))
+	if (!CGameMemory::isGameRunning("armoredwarfare.exe"))
 	{
 		std::cout << "Game isn't running\n";
 		LOG_F(WARNING, "Game is not running on program launch");
-		while (!MemUtils::IsGameRunning("armoredwarfare.exe"))
+		while (!CGameMemory::isGameRunning("armoredwarfare.exe"))
 		{
 			Sleep(INTERVAL_CHECK_GAME_IS_RUNNING);
 		}
@@ -147,7 +147,7 @@ int main(int argc, char* argv[])
 	
 	system("cls");
 	std::cout << "Working....\n";
-	while ((MemUtils::IsGameRunning("armoredwarfare.exe")))
+	while ((GameMemory.isGameRunning("armoredwarfare.exe")))
 	{
 
 #ifdef _DEBUG
