@@ -5,7 +5,7 @@
 #include <tlhelp32.h>
 #include <tchar.h>
 
-import "Helpers/logger.h";
+#include "Helpers/logger.h";
 
 namespace MemUtils
 {

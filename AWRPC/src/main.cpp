@@ -10,9 +10,10 @@
 
 #include "Discord/Discord.h"
 
-#include "Helpers/Helper.hpp"
+//#include "Helpers/Helper.hpp"
 #include "Helpers/Memutils.h"
-//#include "Helpers/logger.h"
+#include "Helpers/logger.h"
+#include "loguru/loguru.cpp"
 
 
 // Defines how often check is game running and for map updates
