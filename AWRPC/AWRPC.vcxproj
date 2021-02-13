@@ -124,12 +124,14 @@
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\bin</OutDir>
     <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\Intermidiate</IntDir>
     <IncludePath>$(ProjectDir)rapidjson;$(ProjectDir)discord\src;$(ProjectDir)discord\include;$(ProjectDir)src;$(IncludePath)</IncludePath>
+    <TargetName>$(ProjectName)_$(Configuration)_$(Platform)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\bin</OutDir>
     <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\Intermidiate</IntDir>
     <IncludePath>$(ProjectDir)rapidjson;$(ProjectDir)discord\src;$(ProjectDir)discord\include;$(ProjectDir)src;$(IncludePath)</IncludePath>
+    <TargetName>$(ProjectName)_$(Configuration)_$(Platform)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -1,40 +1,38 @@
-
 #include <iostream>
 #include <string>
 #include <map>
 #include <ctime>
+#include <chrono>
 
 #include "Discord/Discord.h"
 
-//#include "Helpers/Helper.hpp"
 #include "Helpers/Memutils.h"
 #include "Helpers/logger.h"
 #include "loguru/loguru.cpp"
 
+using namespace std::chrono_literals;
+
 // Defines how often check is game running and for map updates
 #ifdef _DEBUG
-#define INTERVAL_CHECK_GAME_IS_RUNNING 10000
-#define INTERVAL_UPDATE_MAP_INFO 100
+#define INTERVAL_CHECK_GAME_IS_RUNNING 10000ms
+#define INTERVAL_UPDATE_MAP_INFO 100ms
+
+std::string CURRENT_VERSION = std::string("1.1.0 debug build");
 
 #else
-#define INTERVAL_CHECK_GAME_IS_RUNNING 30000
-#define INTERVAL_UPDATE_MAP_INFO 10000
+#define INTERVAL_CHECK_GAME_IS_RUNNING 30000ms
+#define INTERVAL_UPDATE_MAP_INFO 10000ms
+
+std::string CURRENT_VERSION = std::string("1.1.0 release build");
 #endif // _DEBUG
 
 
-#ifdef _DEBUG
-std::string CURRENT_VERSION = std::string("1.1.0 debug build");
-#else
-std::string CURRENT_VERSION = std::string("1.1.0 release build");
-#endif
 
 
 enum class Localization
 {
 	EEng = 0, ERu
 };
-
-
 
 std::map<std::string, MapLocalization> levelLocalization = {
 	// Special
@@ -93,15 +91,11 @@ void wait_for_game_to_launch()
 		LOG_F(WARNING, "Game is not running on program launch");
 		while (!CGameMemory::isGameRunning("armoredwarfare.exe"))
 		{
-			Sleep(INTERVAL_CHECK_GAME_IS_RUNNING);
+			std::this_thread::sleep_for(2000ms);
 		}
 	}
 }
 
-void rpc_loop()
-{
-
-}
 
 int main(int argc, char* argv[])
 {
@@ -232,7 +226,7 @@ int main(int argc, char* argv[])
 #endif // _DEBUG
 		LOG_F(INFO, "Sleeping for %d ms", INTERVAL_UPDATE_MAP_INFO);
 		LOG_F(INFO, "===============================================================");
-		Sleep(INTERVAL_UPDATE_MAP_INFO);
+		std::this_thread::sleep_for(INTERVAL_UPDATE_MAP_INFO);
 	}
 	system("cls");
 
