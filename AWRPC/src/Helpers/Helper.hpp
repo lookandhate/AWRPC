@@ -10,6 +10,7 @@ enum class MapType
 #endif //MAPTYPE
 
 extern const char* MADE_BY_GH;
+extern const char* SUPPORTED_GAME_VERSION;
 
 #ifndef MAPLOCALIZATION
 #define MAPLOCALIZATION

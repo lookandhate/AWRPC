@@ -4,17 +4,12 @@
 #include <map>
 #include <ctime>
 
-#include "Windows.h"
-#include <tlhelp32.h>
-#include <tchar.h>
-
 #include "Discord/Discord.h"
 
 //#include "Helpers/Helper.hpp"
 #include "Helpers/Memutils.h"
 #include "Helpers/logger.h"
 #include "loguru/loguru.cpp"
-
 
 // Defines how often check is game running and for map updates
 #ifdef _DEBUG
@@ -27,7 +22,12 @@
 #endif // _DEBUG
 
 
-#define VERSION 1.1
+#ifdef _DEBUG
+std::string CURRENT_VERSION = std::string("1.1.0 debug build");
+#else
+std::string CURRENT_VERSION = std::string("1.1.0 release build");
+#endif
+
 
 enum class Localization
 {
@@ -108,7 +108,7 @@ int main(int argc, char* argv[])
 	// Initialize the logger
 	loguru::init(argc, argv);
 	loguru::add_file("awrpc.log", loguru::Truncate, loguru::Verbosity_INFO);
-	LOG_F(INFO, "Hello log file!");
+	LOG_F(INFO, "Launching app, version %s, supported game version is %s", CURRENT_VERSION.c_str(), SUPPORTED_GAME_VERSION);
 
 
 	// TODO Cleanup main function and separate it to several functtions
@@ -158,13 +158,15 @@ int main(int argc, char* argv[])
 		bool bMapRead = GameMemory.GetCurrentMap(&buffer);
 		if (!bMapRead)
 			LOG_F(ERROR, "Could not read current map");
-		LOG_F(INFO, "Map has been read successfully");
+		else
+			LOG_F(INFO, "Map has been read successfully");
 		
 		LOG_F(INFO, "Reading nickname....");
 		bool bNicknameRead = GameMemory.GetPlayerNickname(&nickname_buffer);
 		if (!bNicknameRead)
 			LOG_F(ERROR, "Could not read nickname");
-		LOG_F(INFO, "Nickname has been read successfully");
+		else
+			LOG_F(INFO, "Nickname has been read successfully");
 
 		level = std::string(buffer);
 		std::string old_level = std::string(buffer_for_old);
