@@ -17,13 +17,13 @@ using namespace std::chrono_literals;
 #define INTERVAL_CHECK_GAME_IS_RUNNING 10000ms
 #define INTERVAL_UPDATE_MAP_INFO 100ms
 
-std::string CURRENT_VERSION = std::string("1.1.0 debug build");
+std::string CURRENT_VERSION = std::string("1.2.0 debug build");
 
 #else
 #define INTERVAL_CHECK_GAME_IS_RUNNING 30000ms
 #define INTERVAL_UPDATE_MAP_INFO 10000ms
 
-std::string CURRENT_VERSION = std::string("1.1.0 release build");
+std::string CURRENT_VERSION = std::string("1.2.0 release build");
 #endif // _DEBUG
 
 
