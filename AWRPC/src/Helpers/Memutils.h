@@ -11,8 +11,8 @@ class CGameMemory
 {
 private:
 	HANDLE m_hGameHabndle;
-	const uintptr_t m_MAP_NAME_MEMORY_ADDRESS = 0x333758B;
-	const uintptr_t m_NICKNAME_MEMORY_ADDRESS = 0x3130A5C;
+	const uintptr_t m_MAP_NAME_MEMORY_ADDRESS = 0x3350A0B;
+	const uintptr_t m_NICKNAME_MEMORY_ADDRESS = 0x3149A5C;
 	uintptr_t m_ptrGameBaseAddress;
 	DWORD m_dwGamePID;
 

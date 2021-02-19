@@ -34,55 +34,6 @@ enum class Localization
 	EEng = 0, ERu
 };
 
-std::map<std::string, MapLocalization> levelLocalization = {
-	// Special
-	{"cus_alabino_polygon" , MapLocalization("Alabino", "Алабино", MapType::EPvPGlops)},
-	// Hangars
-	{"gar_base" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_eeu_lean" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_geom_thumbnail" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_outdoor" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_season_02" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_season_03" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_season_04" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_season_05" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_season_06" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_china" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_china_spring_festival" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_china_unniversary_alabino_polygon" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_holiday_02" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_holiday_03" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_holiday04" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_holiday05" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_holiday06" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_holiday" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	{"gar_nevada" , MapLocalization("Hangar", "Ангар", MapType::EHangar)},
-	
-	// PvP and GLOPS maps 
-	{"glo01_barrendivide" , MapLocalization("Barren Divide", "Ткварчели", MapType::EGlops)},
-	{"glo05_ghostfield" , MapLocalization("Ghostfield", "Безмер", MapType::EPvPGlops)},
-	{"glo06_narrows" , MapLocalization("Narrows", "Кошице", MapType::EPvPGlops)},
-	{"glo07_roughneck" , MapLocalization("Roughneck", "Надым", MapType::EPvPGlops)},
-	{"glo08_china" , MapLocalization("Baise", "Байсэ", MapType::EPvP)},
-	{"glo09_grassyfields" , MapLocalization("Pleternica", "Плетерница", MapType::EPvP)},
-	{"glo11_alpine" , MapLocalization("Grindelwald", "Гриндельвальд", MapType::EGlops)},
-	{"glo12_eutown" , MapLocalization("Salzburg", "Зальцбург", MapType::EPvPGlops)},
-	{"glo17_coruscant" , MapLocalization("Moscow", "Москва", MapType::EPvP)},
-	{"pvp01_coldstrike" , MapLocalization("Cold Strike", "Гори", MapType::EPvP)},
-	{"pvp02_riverpoint" , MapLocalization("River Point", "Мостар", MapType::EPvP)},
-	{"pvp05_pipelines" , MapLocalization("Pipelines", "Эль-Ариш", MapType::EPvP)},
-	{"pvp06_portstorm" , MapLocalization("Port Storm", "Умм-Каср", MapType::EPvP)},
-	{"pvp07_coastalthreat" , MapLocalization("Coastal Threat", "Батуми", MapType::EPvP)},
-	{"pvp09_reactor" , MapLocalization("Reactor", "Уризар", MapType::EPvP)},
-	{"pvp13_desertcrossing" , MapLocalization("Desert Crossing", "Суэцкий канал", MapType::EGlops)},
-	{"pvp14_lostisland" , MapLocalization("Lost Island", "Палау", MapType::EPvP)},
-	{"pvp15_frontline" , MapLocalization("Front Line", "Виста", MapType::EPvP)},
-	{"pvp18_canyon" , MapLocalization("Chemical Plant", "Аламо", MapType::EPvP)},
-	{"pvp19_tropicalcoast" , MapLocalization("Tropical Coast", "Порт-Антонио", MapType::EPvP)},
-	{"pvp20_panamacanal" , MapLocalization("Waterway", "Панамский канал", MapType::EPvP)},
-	{"glo18_jakku" , MapLocalization("Al Dabbah", "Ткварчели", MapType::EPvP)},
-};
-
 void wait_for_game_to_launch()
 {
 	if (!CGameMemory::isGameRunning("armoredwarfare.exe"))
@@ -148,7 +99,6 @@ int main(int argc, char* argv[])
 		system("cls");
 #endif // _DEBUG
 		LOG_F(INFO, "Reading current map....");
-		
 		bool bMapRead = GameMemory.GetCurrentMap(&buffer);
 		if (!bMapRead)
 			LOG_F(ERROR, "Could not read current map");
@@ -164,6 +114,7 @@ int main(int argc, char* argv[])
 
 		level = std::string(buffer);
 		std::string old_level = std::string(buffer_for_old);
+		
 		if(level != old_level)
 		{
 			LOG_F(INFO, "Updating discord info because old level is not the same as new one (%s != %s)", old_level.c_str(), level.c_str());
@@ -181,12 +132,7 @@ int main(int argc, char* argv[])
 
 			std::string localizedlevel = levelLocalization[level].m_eng;
 			LOG_F(INFO, "Read %s from memory, localized name is %s", level.c_str(), localizedlevel.c_str());
-			switch (lang)
-			{
-			case Localization::ERu:
-				std::string eulocalizedlevel = levelLocalization[level].m_rus;
-				break;
-			}
+
 
 			// Check if we are in the hangar
 			if (levelLocalization[level].m_mapType == MapType::EHangar)
@@ -200,12 +146,18 @@ int main(int argc, char* argv[])
 				{
 					///TODO REPLACE small_logo_black
 					std::string HangarSitting = std::string(nickname_buffer) + std::string(" is sitting in hangar");
-					DiscordSDK->Update(HangarSitting.c_str(), "Testing API", "small_logo_black", (int64_t)timestamp);
+					DiscordSDK->Update(
+						HangarSitting.c_str(),
+						std::string("Running game version " + std::string(SUPPORTED_GAME_VERSION)).c_str(),
+						"small_logo_black",
+						(int64_t)timestamp
+					);
 				}
 				else
 					DiscordSDK->Update("В ангаре", "Проверка API", "small_logo_black", (int64_t)timestamp);
 			}
-			// We are not in the hangar
+			
+				// We are not in the hangar
 			else
 			{
 				if (lang == Localization::EEng)
@@ -219,6 +171,7 @@ int main(int argc, char* argv[])
 					DiscordSDK->Update(PlayingOnMapString.c_str(), "В бою", level.c_str(), (int64_t)timestamp, levelLocalization[level].m_mapType);
 				}
 			}
+			
 			bNeedToBeUpdated = false;
 		}
 #ifdef _DEBUG

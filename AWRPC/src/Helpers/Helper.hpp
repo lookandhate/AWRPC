@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <map>
 
 #ifndef MAPTYPE
 #define MAPTYPE
@@ -27,6 +28,13 @@ struct MapLocalization
 		m_rus(rus), m_eng(eng), m_mapType(maptype) {};
 
 };
+
+typedef std::map<std::string, MapLocalization> LeveLocalizations;
+
+extern LeveLocalizations levelLocalization;
+
+
+
 #endif //MAPLOCALIZATION
 
 
