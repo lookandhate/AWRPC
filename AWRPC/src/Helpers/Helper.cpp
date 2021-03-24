@@ -1,7 +1,7 @@
 #include "Helper.hpp"
 
 const char* MADE_BY_GH = "Available at github.com/lookandhate/AWRPC";
-const char* SUPPORTED_GAME_VERSION = "0.34.7774/8e40c55413c";
+const char* SUPPORTED_GAME_VERSION = "0.35.7919/49159dd42a1";
 
 LeveLocalizations levelLocalization = {
 	// Special
